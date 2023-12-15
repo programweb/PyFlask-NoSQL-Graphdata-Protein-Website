@@ -7,7 +7,7 @@ Python/Flask website in a Docker container. MongoDB, Neo4J, graph databases, NoS
 <img width="320" alt="ERAP1" src="https://github.com/programweb/PyFlask-NoSQL-Graphdata-Protein-Website/assets/12736699/7d509fa3-508d-4389-b7f3-30fce272cce8">
 &nbsp;
 
-I was interested in protein interactions fetched by tapping into webservice endpoints and visualized with NetworkX and various NoSQL databases (MongoDB, Neo4j, etc.).  So, I used them in this project together with Python and some libraries.
+I was interested in protein interactions fetched by tapping into webservice endpoints and visualized with NetworkX. I also became interested in various NoSQL databases (MongoDB, Neo4j, etc. — they can be beneficial in some situations; although SQL and relational databases are the standard for good reasons.).  So, I used them in this project together with Python and some libraries.
 &nbsp;
 
 
