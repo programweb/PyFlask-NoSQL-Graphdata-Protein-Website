@@ -7,7 +7,7 @@ Python/Flask website in a Docker container. MongoDB, Neo4J, graph databases, NoS
 <img width="320" alt="ERAP1" src="https://github.com/programweb/PyFlask-NoSQL-Graphdata-Protein-Website/assets/12736699/7d509fa3-508d-4389-b7f3-30fce272cce8">
 &nbsp;
 
-I was interested in various NoSQL databases (MongoDB, Neo4j, etc.).  So, I used them in this project together with Python and some libraries.
+I was interested in protein interactions fetched by tapping into webservice endpoints and visualized with NetworkX and various NoSQL databases (MongoDB, Neo4j, etc.).  So, I used them in this project together with Python and some libraries.
 &nbsp;
 
 
@@ -24,6 +24,10 @@ I was interested in various NoSQL databases (MongoDB, Neo4j, etc.).  So, I used 
 ![networkx_sm](https://github.com/programweb/PyFlask-NoSQL-Graphdata-Protein-Website/assets/12736699/febe7b77-d0f2-4b17-b452-7e1abc2d91ee)
 &nbsp;
 
+I got interested in the NoSQL databases after reading even the first 3-5 chapters in this book.
+&nbsp;
+
+![data_book_vsm](https://github.com/programweb/PyFlask-NoSQL-Graphdata-Protein-Website/assets/12736699/8a439a94-154f-44c5-b421-54c48c05071c)
 &nbsp;
 
 I DID NOT ADD ALL THE IMAGES IN STATIC/IMAGES/PROTEIN.
@@ -37,4 +41,4 @@ You can get them off the internet.
 I used wget to bring them all down automatically locally - from a selected set of approved gene names in my protein database table.
 &nbsp;
 
-This may be missing a critical file.
+This may be missing a critical file(s).  Sorry about that.  I did this a while back.
