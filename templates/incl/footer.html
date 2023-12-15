@@ -1,0 +1,22 @@
+<tr><td colspan='3' id='foot'>
+
+<!--p> Python &plus; Flask &plus; MongoDB
+<p> Version 2-->
+</td></tr>
+<tr><td colspan='3' id='credits'>
+  <img src='{{url_for('static', filename='images/credit/ebi2.png')}}'>
+  <img src='{{url_for('static', filename='images/credit/biopython2.png')}}'>
+  <img src='{{url_for('static', filename='images/credit/uniprot.png')}}'>
+  <img src='{{url_for('static', filename='images/credit/ncbi3.png')}}'>
+  <img src='{{url_for('static', filename='images/credit/pdb_90.png')}}'>
+</td></tr>
+</table>
+
+{% if d.title == 'Gene List' %}
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
+<script src="{{url_for('static', filename='gene.js')}}"></script>
+{% endif %}
+
+</body>
+</html>

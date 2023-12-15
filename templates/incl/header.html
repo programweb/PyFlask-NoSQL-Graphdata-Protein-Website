@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta charset='UTF-8'>
+<meta name='author' content='Allan Searle'>
+<meta name='keywords' content='MongoDB,Python,Flask,NoSQL,No-SQL,Database,No,SQL,Graph,GraphDB,GraphQL,Column,Store,Document,Collection,Model'>
+<title>{{ d.title }}</title>
+<link rel='stylesheet' href='{{ url_for('static', filename='gene.css') }}'>
+{% if d.title == 'Gene List' -%}
+<link rel='stylesheet' type='text/css' href='https://cdn.datatables.net/1.10.25/css/jquery.dataTables.css'/>
+{% endif %}
+<link rel='icon' href='{{url_for('static', filename='images/web/favicon2.png')}}' type='image/x-icon'>
+<link rel='shortcut icon' href='{{url_for('static', filename='images/web/favicon2.png')}}' type='image/x-icon'>
+</head>
+<body>
+<table id='framework' border='0'><tr><td id='head' colspan='3'>
+  
+  <table id='head-framework' border='0'><tr><td rowspan='3' style='width:425px;'>
+    
+    <table id='tech'>
+    <tr><td>Server-side code</td><td>Python, SQL</td></tr>  
+    <tr><td>Templating/Web</td><td>Flask</td></tr> 
+    <tr><td>Client-side code</td><td>JavaScript, jQuery, HTML, CSS</td></tr> 
+    <tr><td>Database Type</td><td>No-SQL Document Type</td></tr> 
+    <tr><td>Database Server</td><td>MongoDB, Neo4j</td></tr> 
+    <tr><td>Containerization</td><td>Docker</td></tr> 
+    </table>
+    
+  </td><td id='headContent' style='padding-top:0;'>
+    <h1>{{ config.SITE_TITLE }}</h1>
+    <p><i>Tech images and/or Switch Language Control</i>
+    <br><br>
+  </td>
+  </tr><tr>
+  <td id='tech-logos' style=''>
+      <div>
+      {% for i in range(0, d.techLogoList | length ) -%}
+      <img src='{{url_for('static', filename='images/tech_logos/')}}{{ d.techLogoList[i] }}'>
+      {% endfor -%}
+      </div>
+  </td>
+  </tr><tr>
+  <td style='vertical-align:top;'>
+  <div id='topNav'>
+  {% for i in range(0, config.NAV_LINKS | length ) -%}
+  <a href='/{{config.NAV_LINKS[i]}}'{% if d.url == '/' + config.NAV_LINKS[i] %} class='selected'{% endif %}>{{config.NAV_LINKTEXTS[i]}}</a>
+  {% endfor -%}
+  </div>
+  </td></tr>
+  </table>
+
+
+</td></tr>

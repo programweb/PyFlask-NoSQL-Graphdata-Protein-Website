@@ -1,0 +1,33 @@
+flask
+pytest
+PyMongo
+
+pandas
+requests
+
+numpy
+matplotlib
+# nxviz For CircosPlot to work fully, we recommend installing through github (this is a guess)
+# this was ng: git+git://github.com/eduardacenteno/nxviz@main
+# 08/2024 issues with this next one:
+# git+git://github.com/ericmjl/nxviz
+# this was ng: nxviz:0.6.2
+
+neo4j
+
+# alternative to pypher (will try neo4j above)
+py2neo
+
+# this one was having issues; may not be in use anyhow
+# git+git://github.com/networkx/networkx@main
+
+
+# Pypher to execute Cypher Query Language against a Graph Database (requires: numpy, scipy, astropy, pyfits)
+# hope these greater-than-or-equal things work
+# numpy>=1.7.2
+# scipy>=0.9.0
+# pyfits>=3.2.0
+# astropy>=0.4
+# Pypher
+
+# matplotlib

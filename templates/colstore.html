@@ -1,0 +1,68 @@
+{% include 'incl/headernav.html' %}
+
+<td id='body'>
+<h2>Use of Column Store DB</h2>
+<p><i>Column-Store Database Demo</i>
+<ul>
+<li><b>MariaDB</b> - One of the most popular columnar databases available is 
+  MariaDB. It was created as a fork of MySQL intended to be robust and scalable, 
+  handle many different purposes and a large volume of queries.
+  MariaDB ColumnStore is a columnar storage engine that utilizes a massively 
+  parallel distributed data architecture.
+  
+<li><b>Apache Druid</b> in Docker - 
+  Fast column-oriented distributed data store.<br>
+  Druid is a NoSQL database but rather than a 'document store' it is a 'wide column store'<br>
+  <span style=color:blue>Could do this if whole thing is NoSQL databases.</span>
+  <br>A
+  <a href='https://en.wikipedia.org/wiki/Wide-column_store' target='_blank'>wide-column
+    store</a> (or extensible record store) is a type of NoSQL database. 
+  It uses tables, rows, and columns, but unlike a relational database, the names 
+  and format of the columns can vary from row to row in the same table.<br>
+  
+  https://druid.apache.org/docs/latest/tutorials/docker.html
+<li><b>Apache HBase</b> - Apache HBase is a column-oriented, NoSQL database 
+  built on top of Hadoop (HDFS, to be exact). It is an open source 
+  implementation of Google's Bigtable paper.
+<li> Some Column Oriented Databases may be NoSQL and some may not be.
+<li><b>Apache Cassandra</b> (column-oriented database) is a free and open-source, distributed, wide-column store, 
+  NoSQL database management system designed to handle large amounts of
+  data across many commodity servers, providing high availability with no 
+  single point of failure.
+  
+  A wide-column store (or extensible record store) is a type of NoSQL database. 
+  It uses tables, rows, and columns, but unlike a relational database, the names and 
+  format of the columns can vary from row to row in the same table. 
+  A wide-column store can be interpreted as a two-dimensional key–value store.
+  
+  In genuine column stores, a columnar data layout is adopted such that each 
+  column is stored separately on disk. Wide-column stores do often support the 
+  notion of column families that are stored separately. However, each such 
+  column family typically contains multiple columns that are used together, 
+  similar to traditional relational database tables. Within a given column 
+  family, all data is stored in a row-by-row fashion, such that the columns for 
+  a given row are stored together, rather than each column being stored 
+  separately. Wide-column stores that support column families are also known as 
+  column family databases.
+  
+<li> Good tutorial but this part is for installation of Casandra:
+  https://www.tutorialspoint.com/cassandra/cassandra_installation.htm
+<li class=warn> Java is the main prerequisite for Cassandra.
+  
+<li> Logging ?
+<li> User database ?
+<li> If col store too much of a hassle consider putting NumPy or SciPy2 here instead!
+<li> Faster because&hellip; 
+A columnar database is faster and more efficient than a traditional database 
+because the data storage is by columns rather than by rows. ... Column oriented 
+databases have faster query performance because the column design keeps data 
+closer together, which reduces seek time.
+<li> NoSQL databases are often better suited to storing and modeling structured, 
+  semi-structured, and unstructured data in one database.
+</ul>
+</td>
+<td id='third'><h2>Right</h2><p><i>Controls and/or subpages</i></td>
+</tr>
+
+
+{% include 'incl/footer.html' %}

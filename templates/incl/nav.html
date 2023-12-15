@@ -1,0 +1,10 @@
+{% set selected = gene.symbol if gene is defined else '' -%}
+
+<h2>Gene List</h2>
+<div id='geneNav'>
+{% for g in d.genes -%}
+  <div><a href="/gene/{{ g.symbol }}"{% if g.symbol == selected %} class='selected'{% endif %}>{{ g.symbol }}</a></div>
+{% endfor -%}
+</div>
+
+<p> Total: {{ d.genes | length }}

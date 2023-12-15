@@ -1,0 +1,30 @@
+{% include 'incl/headernav.html' %}
+
+<td id='body'>
+<h2>Network Data Structure</h2>
+<p>Technologies: <i>Python, Numpy, Web Services, Pandas, NetworkX, CircosPlot, Anaconda</i>
+<p> The following Network Data Structures can be demonstrated in:
+  Anaconda / Jupyter Lab
+<br> [ bio ]  /python_pro.../networkx_chord.ipynb
+<p><ol>
+  <li> User selects a protein list.
+  <li> A web service
+    (<a href='https://string-db.org/' target='_blank'>String: Protein-Protein Interaction Networks</a>)
+    is consumed and a string is returned
+  <li> The string is split into a Python list data structure
+  <li> The list is added to a Pandas Data Frame
+  <li> The Pandas Data Frame scores interactions
+  <li> A NetworkX Graph Data Structure is instantiated
+  <li> Loop through the interactions caste as a NumPy Array
+  <li> More processing (egs: weight the edges, label &amp; color the nodes)
+  <li> Create a CircosPlot Diagram
+  </ol>
+<p><img src='/static/images/network/network_1.png' style='border:#505050 1px solid;'>
+</td>
+<td id='third'>
+<p><img src='/static/images/network/network_2.png' style='border:#505050 1px solid;'>
+</td>
+</tr>
+
+
+{% include 'incl/footer.html' %}

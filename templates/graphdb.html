@@ -1,0 +1,279 @@
+{% include 'incl/headernav.html' %}
+
+<style>
+ol li{margin-bottom:1em;}
+.warn{color:red;}
+.graph_query b{background-color:#e8e8e8;padding:0 0.37em;}
+.cline{background-color:#000000;color:lime;padding:1px 5px;}
+.gline{background-color:#c0c0c0;color:#0000ff;padding:0 3px;}
+.graph_query{margin-bottom:3em;}
+.graph_query .gline{margin:0;padding:5px 1em;}
+.graph_query a{float:right;display:none;}
+.graph_query .result_target{clear:both;}
+</style>
+
+<td id='body'>
+<h2>Cypher Query Language &mdash; Graph DB</h2>
+<h3>NoSQL Database; sub-type: Graph</h3>
+<p> Neo4j is highly scalable and schema free (NoSQL).
+It is most famous graph database management system, and 
+it is also NoSQL database system.
+Neo4j officially prefers Not only SQL as the definition of NoSQL, because 
+SQL still has its place in any backend.
+<!--a href='https://neo4j.com/blog/why-nosql-databases/' target='_blank'>blog on Neo4j website</a-->
+<!-- using: https://neo4j.com/graphgists/metabolic-pathways-as-graphs/   -->
+
+<div class='graph_query'><b>enzymes in reactions</b> citric acid cycle
+<pre class='gline'>MATCH p=()-[r:CATALYSES]->() RETURN p
+</pre>
+<a href='/graphdb/enzymes'>Execute Cypher QL</a>
+<div id='' class='result_target'>{{ result }}</div>
+<div class='cline'>$ ./neo4j_001_enzyme-reactions.py</div>
+</div>
+
+
+
+<div class='graph_query'><b>species consumed</b> citric acid cycle
+<pre class='gline'>MATCH (m:Molecule)
+OPTIONAL MATCH p=(m)<-[:PRODUCES]-()
+OPTIONAL MATCH s=(m)-[:SUBSTRATE]->()
+WITH m, count(p) AS produced, count(s) AS consumed
+WHERE produced < consumed
+RETURN DISTINCT m.name AS species, produced - consumed AS net
+ORDER BY net ASC
+</pre>
+<a href='/graphdb/consume'>Execute Cypher QL</a>
+<div id='consume' class='result_target'>{{ result }}</div>
+<div class='cline'>$ ./neo4j_002_species-consumed.py</div>
+</div>
+
+<div class='graph_query'><b>species produced</b> citric acid cycle
+<pre class='gline'>MATCH (m:Molecule)
+OPTIONAL MATCH p=(m)<-[:PRODUCES]-()
+OPTIONAL MATCH s=(m)-[:SUBSTRATE]->()
+WITH m, count(p) AS produced, count(s) AS consumed
+WHERE produced > consumed
+RETURN DISTINCT m.name AS species, produced - consumed AS net
+ORDER BY net DESC
+</pre>
+<a href='/graphdb/produce'>Execute Cypher QL</a>
+<div id='' class='result_target'>{{ result }}</div>
+<div class='cline'>$ ./neo4j_003_species-produced.py</div>
+</div>
+
+<div class='graph_query'><b>Enzymes which catalyse the production of NADH</b> citric acid cycle
+<pre class='gline'>MATCH (e)-[:CATALYSES]->()-[:PRODUCES]->(m)
+WHERE m.name='NADH'
+RETURN e.name
+</pre>
+<a href='/graphdb/prodnadh'>Execute Cypher QL</a>
+<div id='' class='result_target'>{{ result }}</div>
+<div>Run in Neo4j browser</div>
+</div>
+
+
+
+<!--
+  Py2neo is the most popular choice for accessing Neo4j using Python.
+  
+  Neo4j Python Driver - more popular than Pypher
+  https://awesomeopensource.com/project/neo4j/neo4j-python-driver?...
+
+
+  Pypher
+  https://neo4j.com/blog/express-cypher-queries-pure-python-pypher/
+  https://pypher.readthedocs.io/en/latest/installation.html
+  This might be another way:  pip install python_cypher     See: https://github.com/emehrkay/Pypher
+  Can run cypher in shell (in Docker):  https://itnext.io/neo4j-graph-database-run-with-docker-and-cypher-ql-examples-6f81315f682
+  shell2: https://dev.to/project42/creating-a-neo4j-cluster-with-docker-1ejn
+  
+  
+  $ grep -rin "pip install" *
+      d8ComposerDrush/app/vendor/drush/drush/.github/workflows/main.yml:32:          python -m pip install --upgrade pip
+      d8ComposerDrush/app/vendor/drush/drush/.github/workflows/main.yml:33:          pip install mkdocs-material pymdown-extensions git+https://gitlab.com/blacs30/mkdocs-edit-url.git
+      getting-started-master/Dockerfile:6:RUN pip install -r requirements.txt
+        grep: msma001/config/vhosts/000-default.conf: No such file or directory
+      Conainter NG or commented-out
+          flask_py/observatory/Dockerfile:5:# RUN pip install --upgrade pip && \
+          flask_py/observatory/Dockerfile:6:#    pip install PyJWT
+          flask_py/observatory/Dockerfile-v1:5:# RUN pip install --upgrade pip && \
+          flask_py/observatory/Dockerfile-v1:6:#    pip install PyJWT
+          flask_py3/service/Dockerfile:5:# RUN pip install --upgrade pip && \
+          flask_py3/service/Dockerfile:6:#    pip install PyJWT
+          py-flask-mongo/Dockerfile:4:RUN pip install -r requirements.txt
+          py-flask-mongo2/service/Dockerfile:5:# RUN pip install --upgrade pip && \
+          py-flask-mongo2/service/Dockerfile:6:#    pip install PyJWT
+          py-flask-mongo3/templates/graphdb.html:42:  This might be another way:  pip install python_cypher     See: https://github.com/emehrkay/Pypher
+          Binary file zlamp/database/ref/refad.MYD matches
+          zlamp/www/python/0020.py:60:# sudo pip install pandas
+          zlamp/www/content/12/1200.php:79:<p> DO THIS: pip install HTSeq
+-->
+
+<h3>References</h3>
+<p><a href='https://reactome.org/PathwayBrowser/#/R-HSA-1428517&PATH=R-HSA-1430728&DTAB=MT' target='_blank'>Reactome: Citric Acid Cycle</a>
+  
+</td>
+<td id='third'><h2>Start &amp; Seed the Neo4j Graph Database</h2><p><i>Prepare database</i>
+  <ol>
+  <li> start neo4j in this container's directory path
+  <pre class='cline' style='padding:1em;width:90%;'>docker run \
+      --publish=7474:7474 --publish=7687:7687 \
+      --volume=$HOME/neo4j/data:/data \
+      --rm -d neo4j</pre>
+  <li> exit browser tab to neo4j (if you have it on ) eg:  http://localhost:11004/browser/
+  <li> quit neo4j Desktop if you have it on
+  <li> start neo4j Desktop
+  <li> start movie database example in neo4j Desktop (otherwise next step will not work with 11004)
+    <ul>
+    <li> when first open the Neo4j Desktop App you should see "Example Project" and "Movie Database"
+    <li> if you hover over "Movie Database" it says "Start"
+    <li> click "Start"
+    <li> click "Open" to open in the Neo4J Browser
+    <li> click the Database icon (top left) and use the database "test"
+         <ul> if there is no test db, follow the steps below to make it
+         </ul>
+    <li> click *(40) to see your test database data if it is saved
+    </ul>
+  <li> Go here: <a href='goneo' target=='_blank'>Neo4j Graph Database</a>
+  <li> Try to change to test db if not on it already (web browser)
+  <li> Try click *(40) to see your test database data if it is saved (web browser)
+  
+  <li> Try <span class='gline'>:server status</span> (web browser)
+  <br>     if not pyneouser execute this in the browser to neo4j  (web browser)
+  <br><span class='gline'>CREATE USER pyneouser IF NOT EXISTS SET password 'ABC123abc' CHANGE NOT REQUIRED</span>
+  <li> try <u>neo4j_2.ipynb</u> in Anaconda
+
+  <li> Can create a database: <span class='gline'>CREATE DATABASE test IF NOT EXISTS</span>
+  <li> See it: <span class='gline'>SHOW DATABASES</span>
+  <li> In the browser tab to neo4j &gt; top left link (Database Information)
+       &gt; Use database test from the dropdown menu
+  <li> Load neo4j data;   Can execute the SQL (or whatever it is) of
+       <a href='https://www.melvinvivas.com/neo4j-in-docker' target='_blank'>this page</a>
+       in the browser tab to neo4j;  Execute it all in one shot!
+       
+<pre class='gline' style='padding:1em 0.5em;'>CREATE (water:Molecule {name:"H\u2082O"}),
+(coa_sh:Molecule {name:"CoA-SH"}),
+(nad:Molecule {name:"NAD\u207a"}),
+(nadh:Molecule {name:"NADH"}),
+(h:Molecule {name:"H\u207a"}),
+(co2:Molecule {name:"CO\u2082"}),
+(gdp:Molecule {name:"GDP"}),
+(gtp:Molecule {name:"GTP"}),
+(phosphate:Molecule {name:"P\u1d62"}),
+(ubiquinone:Molecule {name:"ubiquinone"}),
+(ubiquinol:Molecule {name:"ubiquinol"}),
+ 
+(acetyl_coa:Molecule {name:"Acetyl CoA"}),
+(oxaloacetate:Molecule {name:"Oxaloacetate"}),
+ 
+(r1:Reaction {name:1}),
+(citrate:Molecule {name:"Citrate"}),
+(citrate_synthase:Enzyme {name:"Citrate synthase"}),
+ 
+(oxaloacetate)-[:SUBSTRATE]-&gt;(r1),
+(acetyl_coa)-[:SUBSTRATE]-&gt;(r1),
+(water)-[:SUBSTRATE]-&gt;(r1),
+(r1)-[:PRODUCES]-&gt;(citrate),
+(r1)-[:PRODUCES]-&gt;(coa_sh),
+(citrate_synthase)-[:CATALYSES]-&gt;(r1),
+ 
+(r2:Reaction {name:2}),
+(cis_aconitate:Molecule {name:"cis-Aconitate"}),
+(aconitase:Enzyme {name:"Aconitase"}),
+ 
+(citrate)-[:SUBSTRATE]-&gt;(r2),
+(r2)-[:PRODUCES]-&gt;(cis_aconitate),
+(r2)-[:PRODUCES]-&gt;(water),
+(aconitase)-[:CATALYSES]-&gt;(r2),
+ 
+(r3:Reaction {name:3}),
+(isocitrate:Molecule {name:"Isocitrate"}),
+ 
+(cis_aconitate)-[:SUBSTRATE]-&gt;(r3),
+(water)-[:SUBSRATE]-&gt;(r3),
+(r3)-[:PRODUCES]-&gt;(isocitrate),
+(aconitase)-[:CATALYSES]-&gt;(r3),
+ 
+(r4:Reaction {name:4}),
+(oxalosuccinate:Molecule {name:"Oxalosuccinate"}),
+(isocitrate_dehydrogenase:Enzyme {name:"Isocitrate dehydrogenase"}),
+ 
+(isocitrate)-[:SUBSTRATE]-&gt;(r4),
+(nad)-[:SUBSTRATE]-&gt;(r4),
+(r4)-[:PRODUCES]-&gt;(oxalosuccinate),
+(r4)-[:PRODUCES]-&gt;(nadh),
+(r4)-[:PRODUCES]-&gt;(h),
+(isocitrate_dehydrogenase)-[:CATALYSES]-&gt;(r4),
+ 
+(r5:Reaction {name:5}),
+(alpha_ketoglutarate:Molecule {name:"\u03b1-Ketoglutarate"}),
+ 
+(oxalosuccinate)-[:SUBSTRATE]-&gt;(r5),
+(r5)-[:PRODUCES]-&gt;(alpha_ketoglutarate),
+(r5)-[:PRODUCES]-&gt;(co2),
+(isocitrate_dehydrogenase)-[:CATALYSES]-&gt;(r5),
+ 
+(r6:Reaction {name:6}),
+(succinyl_coa:Molecule {name:"Succinyl-CoA"}),
+(alpha_ketoglutarate_dehydrogenase:Enzyme {name:"\u03b1-Ketoglutarate dehydrogenase"}),
+ 
+(alpha_ketoglutarate)-[:SUBSTRATE]-&gt;(r6),
+(nad)-[:SUBSTRATE]-&gt;(r6),
+(coa_sh)-[:SUBSTRATE]-&gt;(r6),
+(r6)-[:PRODUCES]-&gt;(succinyl_coa),
+(r6)-[:PRODUCES]-&gt;(nadh),
+(r6)-[:PRODUCES]-&gt;(h),
+(r6)-[:PRODUCES]-&gt;(co2),
+(alpha_ketoglutarate_dehydrogenase)-[:CATALYSES]-&gt;(r6),
+ 
+(r7:Reaction {name:7}),
+(succinate:Molecule {name:"Succinate"}),
+(succinyl_coa_synthetase:Enzyme {name:"Succinyl-CoA synthetase"}),
+ 
+(succinyl_coa)-[:SUBSTRATE]-&gt;(r7),
+(gdp)-[:SUBSTRATE]-&gt;(r7),
+(phosphate)-[:SUBSTRATE]-&gt;(r7),
+(r7)-[:PRODUCES]-&gt;(succinate),
+(r7)-[:PRODUCES]-&gt;(coa_sh),
+(r7)-[:PRODUCES]-&gt;(gtp),
+(succinyl_coa_synthetase)-[:CATALYSES]-&gt;(r7),
+ 
+(r8:Reaction {name:8}),
+(fumarate:Molecule {name:"Fumarate"}),
+(succinate_dehydrogenase:Enzyme {name:"Succinate dehydrogenase"}),
+ 
+(succinate)-[:SUBSTRATE]-&gt;(r8),
+(ubiquinone)-[:SUBSTRATE]-&gt;(r8),
+(r8)-[:PRODUCES]-&gt;(fumarate),
+(r8)-[:PRODUCES]-&gt;(ubiquinol),
+(succinate_dehydrogenase)-[:CATALYSES]-&gt;(r8),
+ 
+(r9:Reaction {name:9}),
+(l_malate:Molecule {name:"\u029f-Malate"}),
+(fumarase:Enzyme {name:"Fumarase"}),
+ 
+(fumarate)-[:SUBSTRATE]-&gt;(r9),
+(water)-[:SUBSTRATE]-&gt;(r9),
+(r9)-[:PRODUCES]-&gt;(l_malate),
+(fumarase)-[:CATALYSES]-&gt;(r9),
+ 
+(r10:Reaction {name:10}),
+(malate_dehydrogenase:Enzyme {name:"Malate dehydrogenase"}),
+ 
+(l_malate)-[:SUBSTRATE]-&gt;(r10),
+(nad)-[:SUBSTRATE]-&gt;(r10),
+(r10)-[:PRODUCES]-&gt;(oxaloacetate),
+(r10)-[:PRODUCES]-&gt;(nadh),
+(r10)-[:PRODUCES]-&gt;(h),
+(malate_dehydrogenase)-[:CATALYSES]-&gt;(r10)
+</pre>
+
+  <li> query to see it:  MATCH(n) RETURN n
+
+  <li> hit the *(40) Node label to see: moldcule &plus; reaction &plus; enzyme
+  </ol>
+</td>
+</tr>
+
+
+{% include 'incl/footer.html' %}

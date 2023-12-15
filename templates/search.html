@@ -1,0 +1,62 @@
+{% include 'incl/headernav.html' %}
+
+<td colspan='2' style='height:63px;padding:0 1em;border-left:#909090 1px dashed;background-color:#ffffff;'>
+  <form action="/search" method="POST">
+  <input name='st' value='{{ search_terms }}' style='width:80%;'>
+  &nbsp;&nbsp;
+  <input type="submit" value="Go">
+  </form></td></tr><tr>
+<td id='body'>
+{% if search_terms %}
+  <h2>Search Results</h2>
+  {% for doc in docList %}
+  <div class='searchResult'><a href='/gene/{{doc.symbol}}'>{{doc.symbol}}</a>
+    <div>{{doc.gene}}</div>
+    <div>{{doc.chromosome}}</div>
+    <div class='searchgroup'>{{doc.geneGroupName}}</div>
+       {% for key, value in doc.items() %}
+          <!--p>Key: {{key}} |
+          Value: {{value}}</p-->
+       {% endfor %}
+  </div><!-- end search result -->
+  {% endfor %}
+{% else %}
+  <p><img src='/static/images/web/dna_light_001.jpg' style='border:#505050 1px solid;width:1048px;'>
+{% endif %}
+<!--  print(docList) -->
+
+
+{% if error %}
+<div style="color:red;">
+  {{ error }}
+</div>
+{% endif %}
+
+
+
+</td>
+<td id='third'><!--h2>Right</h2><p><i>Tech images could go here; and/or rotating advertisements</i--></td>
+</tr>
+
+
+
+<tr><!-- TEMP ROW -->
+<td></td>
+<td>
+
+
+<form action="/get" method="POST">
+Name: <input name="name">
+<input type="submit" value="Get">
+</form>
+
+{% if error %}
+<div style="color:red;">
+  {{ error }}
+</div>
+{% endif %}
+
+</td><td>&nbsp;</td></tr><!--  END TEMP ROW -->
+
+
+{% include 'incl/footer.html' %}

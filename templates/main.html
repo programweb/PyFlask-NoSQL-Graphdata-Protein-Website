@@ -1,0 +1,80 @@
+{% include 'incl/headernav.html' %}
+
+<td id='body'>
+<h2>NoSQL Databases</h2>
+<br>
+<img src='/static/images/web/types-nosql.jpg' style='border:#505050 1px solid;'>
+</td>
+<td id='third' style='color:#909090;'>
+<h2>Presentation</h2>
+<p>
+<ol>
+<li> Tech Involved
+<li><a href='certs'>Certifications</a>
+<li> scipy &uarr;
+<li><a href='benefits'>Benefits</a>
+
+<li><a href='data-intensive'>bk: Data-Intensive</a>
+<li> netwk/graph data
+<br> (Anaconda demo) &uarr;
+
+<li> MongoDB NT5 Search 
+<br> (missing data)
+
+<li> Neo4j
+
+<li> Other
+   <ul>
+   <li> Flask
+   <li> MongoDb code
+   </ul>
+</ol>
+
+
+
+<h2>Extra Links</h2>
+<p><a href='/list'>List Page</a> is on its way out; lists people.
+Actually, it could be used if I want to have a login capability
+and try out sessions with Flask.
+
+<p><a href='cstore'>Column-Store</a>
+  
+<p><a href='data-intensive'>Data-Intensive</a>
+</td>
+</tr>
+
+
+<!-- START TEMP ROW -->
+<!-- tr>
+<td></td>
+<td>
+
+<h2>Add</h2>
+<h3>Add a person</h3>
+<form action="/save" method="POST">
+  <table>
+    <tr><td>Name: </td><td><input name="name"></td></tr>
+    <tr><td>Email: </td><td><input name="email"></td></tr>
+    <tr><td>ID: </td><td><input name="idnum"></td></tr>
+  </table>
+<input type="submit" value="Save">
+</form>
+
+<h2>Search</h2>
+<h3>Search for people by name</h3>
+<form action="/get" method="POST">
+Name: <input name="name">
+<input type="submit" value="Get">
+</form>
+
+{% if error %}
+<div style="color:red;">
+  {{ error }}
+</div>
+{% endif %}
+
+</td><td>&nbsp;</td></tr-->
+<!--  END TEMP ROW -->
+
+
+{% include 'incl/footer.html' %}

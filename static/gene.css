@@ -1,0 +1,65 @@
+body{margin:0;padding:0;}
+#framework{width:100%;height:100%;}
+#head{text-align:center;background-color:#ffffff;padding:0;}
+#head-framework{width:100%;border-collapse:collapse;}
+h1{margin-top:0.70em;margin-bottom:0;}
+#headContent h1{margin-top:0;}
+#tech-logos{vertical-align:bottom;height:78px;padding:0;}
+#tech-logos div{background-color:#ffffff;border-top:#00487d 5px solid;padding:4px 0;}
+#tech-logos img{margin:0 1.5em;}
+#tech{background-color:#ffffff;border-collapse:collapse;border-left:#0066b3 21px solid;}
+#tech td{text-align:left;border:#909090 2px solid;padding:7pt 15pt;font-weight:bold;color:#00487d;}
+#tech td:nth-child(1){padding-left:0.5em;background-color:#bfe4ff;}
+#topNav{background-color:#0066b3;border:#000000 1px solid;width:100%;
+  border-left:none;border-right:none;}
+#topNav a{border:#000000 1px solid;border-bottom-width:3px;padding:0;margin:0.3em 0.12em;
+  color:#647d8f;background-color:#bfe4ff;text-decoration:none;font-weight:bold;
+  display:inline-block;width:140px;height:33px;line-height:33px;
+  }
+#topNav a:hover{color:#24006b;background-color:#e6f4ff;border-color:#ffcc00;}
+#topNav a.selected{background-color:#e6f4ff;border-bottom:#ff8000 3px solid;color:#00487d;}
+#body{border-left:#909090 1px dashed;padding:0 1em;vertical-align:top;}
+#third{width:37%;vertical-align:top;}
+/* left column nav; inside the first td */
+#first{width:12%;vertical-align:top;background-color:#e6f4ff;}
+#first h2{text-align:center;}
+#geneNav{margin:0 0 0 0;border:#ffffff 1px dotted;}
+#geneNav div{padding:0.2em 0;}
+#geneNav a{text-decoration:none;
+  color:#ffffff;font-weight:bold;
+  background-color:#647d8f;border:#707070 1px solid;
+  border-left-width:15px;
+  display:inline-block;width:70%;
+  padding:0.3em 0.3em 0.3em 1em;margin:0 0.12em;}
+#geneNav a:hover{
+  color:#0066b3;
+  background-color:#efefef;border-color:#707070;}
+#geneNav a.selected{border-left:orange 15px solid;}
+/* gene list page */
+#geneList_wrapper{border:#ffffff 1px solid;width:98%;margin-top:0.5em;}
+#geneList{margin-top:2.5em;}
+#geneList th{width:170px;background-color:#cfdce6;}
+#geneList th.small{width:87px;}
+#geneList td{padding:1em 1em;text-align:left;}
+#geneList td.first{width:200px;text-align:left;}
+#geneList .yes, #geneList .no{font-size:x-large;text-align:center;padding:0 0;color:green;}
+#geneList .no{color:#cccccc;}
+#gene_info{}
+#gene_info td.label{font-weight:bold;white-space:nowrap;padding-right:2em;color:#505050;}
+#gene_info td{padding:1em 1em 1em 0;vertical-align:top;}
+.searchResult{margin-bottom:2em;}
+.searchgroup{color:#909090;margin-top:0;}
+#cert h2, #cert h3{margin-left:0.8em;}
+#cert ol{font-weight:bold;}
+#cert ol div{color:#727ea3;margin:0.25em 0 1.5em 0;}
+/* footer */
+#foot{border-top:#cccccc 1px dashed;padding-top:1em;height:200px;
+    background-color:#0066b3;font-size:smaller;}
+#credits{text-align:center;padding:7px 0 7px 0;
+    border-top:#6096bf 3px solid;
+    border-bottom:#647d8f 14px solid;
+    background-color:#80c9ff;}
+#credits img{margin:0 1em;border:#000099 1px solid;
+  filter:alpha(opacity=90);-moz-opacity:.90;opacity:.90;
+  height:130px;} /* control final size of credit images here */
+#benefits li{margin-bottom:1.5em;}

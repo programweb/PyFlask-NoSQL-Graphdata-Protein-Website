@@ -1,0 +1,41 @@
+{% include 'incl/header.html' %}
+{% import 'incl/macros.html' as macros %}
+
+<tr><td id='head' colspan='3'>
+<!--  h2>List of Genes</h2>
+Total: {{ count }}
+-->
+
+  <center>
+  <table border='1' id='geneList'>
+  <thead>
+  <tr>
+  {% for i in range(0, len) %}
+    <th class='{% if i < 3 %}txt{% else %}small{% endif %}'>{% autoescape false %}{{hdrList[i]}}{% endautoescape %}</th>
+  {% endfor %}
+  </tr>
+  </thead>
+  <tbody>
+
+  {% for gene in genes %}
+  <tr>
+    <td class='first'><a href="/gene/{{ gene.symbol }}">{{ gene.symbol }}</a></td>
+    <td>{{ gene.gene }}</td>
+    <td>{{ gene.chromosome }}</td>
+    {{ macros.render_cell(gene.geneGroupName) }}
+    {{ macros.render_cell(gene.product) }}
+    {{ macros.render_cell(gene.ensemblGeneID) }}
+    {{ macros.render_cell(gene.enzymeIDs) }}
+    {{ macros.render_cell(gene.definition) }}
+    {{ macros.render_cell(gene.note) }}
+    {{ macros.render_cell(gene.accessionInterval) }}
+    {{ macros.render_cell(gene.omimID) }}
+  </tr>
+  {% endfor %}
+  </tbody>
+  </table>
+  </center>
+
+</td></tr>
+
+{% include 'incl/footer.html' %}

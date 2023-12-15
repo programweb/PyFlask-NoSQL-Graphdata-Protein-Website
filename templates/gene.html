@@ -1,0 +1,27 @@
+{% include 'incl/headernav.html' %}
+
+<td id='body'>
+<h2>{{ gene.symbol }}</h2>
+
+  <table id='gene_info'>
+  <tr><td class='label'>Protein:</td><td><a href='https://screek/sunkencreek2be/proteins-genes?gene={{ gene.symbol }}' target='_blank'>{{ gene.gene }}</a></td></tr>
+  <tr><td class='label'>Chromosome:</td><td><a href='http://screek/sunkencreek2be/chromosomes-loci?gene={{ gene.symbol }}&nt={{ gene.chromosome }}' target='_blank'>{{ gene.chromosome }}</a></td></tr>
+  <tr><td class='label'>Gene Group:</td><td>{{ gene.geneGroupName }}</td></tr>
+  <tr><td class='label'>Product:</td><td>{{ gene.product }}</td></tr>
+  <tr><td class='label'>Accession Interval:</td><td>{{ gene.accessionInterval }}</td></tr>
+  <tr><td class='label'>Note:</td><td>{{ gene.note }}</td></tr>
+  <tr><td class='label'>HGNC ID:</td><td>{{ gene.hgncID }}</td></tr>
+  <tr><td class='label'>Summary:</td><td>{{ gene.summary }}</td></tr>
+  <tr><td class='label'>OMIM ID:</td><td>{{ gene.omimID }}</td></tr>
+  <tr><td class='label'>Ensembl Gene ID:</td><td><a href='http://uswest.ensembl.org/Homo_sapiens/Gene/Summary?g={{ gene.ensemblGeneID }}' target='_blank'>{{ gene.ensemblGeneID }}</a></td></tr>
+  <tr><td class='label'>Enzyme IDs:</td><td>{{ gene.enzymeIDs }}</td></tr>
+  <tr><td class='label'>Definition:</td><td>{{ gene.definition }}</td></tr>
+  </table>
+
+</td>
+<td id='third'>
+<img src='{{url_for('static', filename='images/protein/')}}{{ gene.symbol }}.png'>
+</td>
+</tr>
+
+{% include 'incl/footer.html' %}

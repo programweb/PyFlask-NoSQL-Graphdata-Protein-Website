@@ -1,0 +1,9 @@
+{% macro render_cell( geneItem ) %}
+
+<td>{% if( geneItem is defined) and geneItem %}
+        <span class='yes'>&#10003;</span>
+    {% else %}
+        <span class='no'>&#10006;</span>
+    {% endif %}</td>
+
+{% endmacro %}
